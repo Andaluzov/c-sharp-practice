@@ -6,17 +6,13 @@ namespace practice_exercises
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Hello World! this is tre tasks");
             
             Console.WriteLine("#1");
             Console.Write("number = ");
-            int number = Int32.Parse(Console.ReadLine());
-            string[] drawStars = new string[number];            
-            DrawStaircase(number,out drawStars);
-            for (int i = 0; i < drawStars.Length; i++)
-            {
-                Console.WriteLine(drawStars[i]);
-            }
+            int number = Int32.Parse(Console.ReadLine()); 
+            DrawStaircase(number);
+            
 
             Console.WriteLine("#2");
             Console.Write("vvedite integer number = ");
@@ -52,35 +48,31 @@ namespace practice_exercises
         ///Нужно вывести в консоль "лесенку": 
         ///Количество строк = количеству символов в последней строке = числу n.
         ///Ширина 1 пробела примерно равна ширине символа.
-        ///</summary>
-        
-
-        static void DrawStaircase(int number, out string[] drawStars)
+        ///</summary>        
+        static void DrawStaircase(int number)
         {
-            drawStars = new String[number];
+            string[] drawStars = new string[number];
             string[] strokaChar = new string[number];
-            
-             for (int i = 0; i < number; i++)
-             {
-                 strokaChar[i] = " ";
-             }
-            
+            for (int i = 0; i < number; i++)
+            {
+                strokaChar[i] = " ";
+            }            
             for (int i = 0; i<number; i++)
             {
                 strokaChar[number - i - 1] = "#";           
-                drawStars[i] = String.Join("",strokaChar);
-                
+                drawStars[i] = String.Join("",strokaChar);                
             }
-           
+            for (int i = 0; i < drawStars.Length; i++)
+            {
+                Console.WriteLine(drawStars[i]);
+            }
             return;
         }
-
 
         /// <summary>
         /// Задача 2 - Простые числа
         /// Определить, является ли число простым. 
         /// </summary>
-
         static bool IsPrime(int x)
         {
             int  d = 2;
@@ -99,12 +91,10 @@ namespace practice_exercises
         /// Определить, является ли строка палиндромом. Например, "а роза упала на лапу Азора".
         /// Пробелы предлагаю не учитывать, и большие буквы тоже сделать строку состоящей из маленьких букв:str.ToLower()
         /// Заменить символы в строке (в данном случае - пробел на пустую строку)Console.WriteLine(str.Replace(" ", ""));
-        /// </summary>
-         
+        /// </summary>         
         static bool IsPalindrome(string palindr)
         {
-            string new_str = palindr.ToLower().Replace(" ", "");
-            Console.WriteLine(new_str);
+            string new_str = palindr.ToLower().Replace(" ", "");            
             int dl = new_str.Length;
             bool p = true;
             for (int i = 0; i < dl / 2; i++)
