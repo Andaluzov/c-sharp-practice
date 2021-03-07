@@ -7,115 +7,115 @@ namespace practice_exercises
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            SayHello();
-            Task1();
-            Task2();
-            Task3();
-        }
-        static void SayHello()
-        {
-            Console.WriteLine("Hello");
-
-        }
-        static void Task1()
-        {
-            Console.WriteLine("Task1");
-            /*
-             Задача 1 - Лесенка
-                В метод передается целое число n (типа int).
-                Нужно вывести в консоль "лесенку": 
-                Количество строк = количеству символов в последней строке = числу n.
-                Ширина 1 пробела примерно равна ширине символа.
-              */
-            //char[] stars;
-            int index;
-            Console.Write("n = ");
+            
+            Console.WriteLine("#1");
+            Console.Write("number = ");
             int number = Int32.Parse(Console.ReadLine());
-            char[] stars = new char[number];
-            for (int i = 0; i < number; i++)
+            string[] drawStars = new string[number];            
+            DrawStaircase(number,out drawStars);
+            for (int i = 0; i < drawStars.Length; i++)
             {
-                stars[i] = ' ';
+                Console.WriteLine(drawStars[i]);
             }
 
-            for (int i = 0; i < number; i++)
-            {               
-                index = number - i-1;
-                stars[index] = '#';
-                MasPrint(stars);
-                Console.WriteLine();
-            }
-        } 
-        //write massiv
-        static void MasPrint(char[] massiv)
-        {
-            for (int i = 0; i < massiv.Length; i++)
-            { 
-                Console.Write(massiv[i]);
-            }                    
-        }
-        static void Task2()
-        {
-            Console.WriteLine("Task2");
-            /*
-             Задача 2 - Простые числа
-            Определить, является ли число простым. 
-            Простое число: целое положительное число больше 1, 
-            делится без остатка только на себя и 1.
-              */
-            int d;
-            Console.Write("vvedite integer n = ");
-            int number = Int32.Parse(Console.ReadLine());
-            d = 2;
-            while (number % d != 0)
+            Console.WriteLine("#2");
+            Console.Write("vvedite integer number = ");
+            number = Int32.Parse(Console.ReadLine());
+            bool rez = IsPrime(number);
+            if (rez)
             {
-                d ++;
-                               
-            }
-            if (d == number)
-            {
-                Console.WriteLine("True, это простое число");
+                Console.WriteLine("это простое число");
             }
             else
             {
-                Console.WriteLine("False, это не простое число");
+                Console.WriteLine("это не простое число");
             }
 
-        }
-        static void Task3()
-        {
-            Console.WriteLine("Task3");
-            /*
-            Задача 3 - Палиндром 
-            Определить, является ли строка палиндромом. Например, "а роза упала на лапу Азора".
-            Пробелы предлагаю не учитывать, и большие буквы тоже
-            сделать строку состоящей из маленьких букв:
-            str.ToLower()
-            Заменить символы в строке (в данном случае - пробел на пустую строку)
-            Console.WriteLine(str.Replace(" ", ""));
-              */
-            
+            Console.WriteLine("#3");
             Console.Write("введите строку = ");
-            string new_str = Console.ReadLine().ToLower().Replace(" ", "");
-                       
-            int dl = new_str.Length;
-            bool p = true;
-            for (int i = 0; i < dl / 2; i++)
-            {
-                 if (new_str[i] != new_str[dl-i-1])
-                {
-                    p = false;      
-                    break;  
-                }              
-            }
-            if (p)
+            string palindr = Console.ReadLine();
+
+            bool rez_palindr = IsPalindrome(palindr);
+            if (rez_palindr)
             {
                 Console.WriteLine("yes, это Палиндром");
             }
             else
             {
-            Console.WriteLine("no, это не палиндром");
+                Console.WriteLine("no, это не палиндром");
             }
+        }
         
+        ///<summary>     
+        ///Задача 1 - Лесенка
+        ///В метод передается целое число n (типа int).
+        ///Нужно вывести в консоль "лесенку": 
+        ///Количество строк = количеству символов в последней строке = числу n.
+        ///Ширина 1 пробела примерно равна ширине символа.
+        ///</summary>
+        
+
+        static void DrawStaircase(int number, out string[] drawStars)
+        {
+            drawStars = new String[number];
+            string[] strokaChar = new string[number];
+            
+             for (int i = 0; i < number; i++)
+             {
+                 strokaChar[i] = " ";
+             }
+            
+            for (int i = 0; i<number; i++)
+            {
+                strokaChar[number - i - 1] = "#";           
+                drawStars[i] = String.Join("",strokaChar);
+                
+            }
+           
+            return;
+        }
+
+
+        /// <summary>
+        /// Задача 2 - Простые числа
+        /// Определить, является ли число простым. 
+        /// </summary>
+
+        static bool IsPrime(int x)
+        {
+            int  d = 2;
+            if (x == 1)
+                return true;
+            else
+                while (x % d != 0)
+                {
+                    d++;
+                }
+            return (d == x);
+        }
+
+        /// <summary>
+        /// Задача 3 - Палиндром 
+        /// Определить, является ли строка палиндромом. Например, "а роза упала на лапу Азора".
+        /// Пробелы предлагаю не учитывать, и большие буквы тоже сделать строку состоящей из маленьких букв:str.ToLower()
+        /// Заменить символы в строке (в данном случае - пробел на пустую строку)Console.WriteLine(str.Replace(" ", ""));
+        /// </summary>
+         
+        static bool IsPalindrome(string palindr)
+        {
+            string new_str = palindr.ToLower().Replace(" ", "");
+            Console.WriteLine(new_str);
+            int dl = new_str.Length;
+            bool p = true;
+            for (int i = 0; i < dl / 2; i++)
+            {
+                if (new_str[i] != new_str[dl-i-1])
+                {
+                    p = false;      
+                    break;  
+                }            
+            }           
+        return (p); 
         }
     }
 }
